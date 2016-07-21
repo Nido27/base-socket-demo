@@ -16,6 +16,26 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
 
 
+//main endpoint
 app.get("/", function(req, res) {
   res.render("index.html");
+});
+
+//basic connection
+io.on("connection", function(socket) {
+  console.log("A user has connected");
+
+  //io event can be any string
+  socket.on("incoming", function(data) {
+    if(! data.message) {
+      io.sockets.connected[socket.id].emit("outgoing", {"message": "Failed message must be provided"});
+    } else {
+      io.emit("outgoing", {"message": data.message});
+    }
+  });
+
+  //user disconnects
+  socket.on('disconnect', function () {
+    console.log("A user has disconnected");
+  });
 });

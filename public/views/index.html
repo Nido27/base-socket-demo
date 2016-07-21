@@ -9,7 +9,7 @@
 </head>
 <body ng-app="app">
   <div ng-controller="mainController">
-    <div class="main-box">
+    <div class="main-box" ng-init="initIO()">
       <div id="chat-box" class="chat-box">
         <div class="chat" ng-repeat="chat in chats track by $index">
           <div class="chat-text">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="message-box"><input class="u-full-width" type="text" ng-model="message"></div>
-      <div class="button-box"><a class="button"><i class="fa fa-comment" aria-hidden="true"></i></a></div>
+      <div class="button-box"><a ng-click="sendChat()" class="button"><i class="fa fa-comment" aria-hidden="true"></i></a></div>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
